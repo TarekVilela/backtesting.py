@@ -1533,7 +1533,7 @@ class Backtest:
         })
         trades_df['Duration'] = trades_df['ExitTime'] - trades_df['EntryTime']
 
-        pl = trades_df['PnL'] * self.muliplier
+        pl = trades_df['PnL'] * self.multiplier
         returns = trades_df['ReturnPct']
         durations = trades_df['Duration']
 
