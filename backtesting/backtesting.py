@@ -1091,6 +1091,8 @@ class Backtest:
         self._strategy = strategy
         self._results = None
 
+        self.multiplier = multiplier
+
     def run(self, **kwargs) -> pd.Series:
         """
         Run the backtest. Returns `pd.Series` with results and statistics.
@@ -1533,7 +1535,7 @@ class Backtest:
         })
         trades_df['Duration'] = trades_df['ExitTime'] - trades_df['EntryTime']
 
-        pl = trades_df['PnL'] * self.multiplier
+        pl = trades_df['PnL'] * Backtest.multiplier
         returns = trades_df['ReturnPct']
         durations = trades_df['Duration']
 
