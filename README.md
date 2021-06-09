@@ -1,5 +1,7 @@
 **Modificações para trabalhar com futuros de energia**
+
     - multiplier;
+    
     - remoção da limitação de size;
 
 [![](https://i.imgur.com/E8Kj69Y.png)](https://kernc.github.io/backtesting.py/)
