@@ -863,7 +863,7 @@ class _Broker:
                 if not size:
                     self.orders.remove(order)
                     continue
-            assert size == round(size)
+            #assert size == round(size)
             need_size = int(size)
 
             if not self._hedging:
@@ -1534,8 +1534,9 @@ class Backtest:
             'ExitTime': [t.exit_time for t in trades],
         })
         trades_df['Duration'] = trades_df['ExitTime'] - trades_df['EntryTime']
+        trades_df['PnL'] *= self.multiplier
 
-        pl = trades_df['PnL'] * self.multiplier
+        pl = trades_df['PnL']
         returns = trades_df['ReturnPct']
         durations = trades_df['Duration']
 
