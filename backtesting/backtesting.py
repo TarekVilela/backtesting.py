@@ -36,7 +36,7 @@ __pdoc__ = {
     'Order.__init__': False,
     'Position.__init__': False,
     'Trade.__init__': False,
-}
+}   
 
 
 class Strategy(metaclass=ABCMeta):
@@ -203,8 +203,8 @@ class Strategy(metaclass=ABCMeta):
 
         See also `Strategy.sell()`.
         """
-        assert 0 < size < 1 or round(size) == size, \
-            "size must be a positive fraction of equity, or a positive whole number of units"
+        #assert 0 < size < 1 or round(size) == size, \
+            #"size must be a positive fraction of equity, or a positive whole number of units"
         return self._broker.new_order(size, limit, stop, sl, tp)
 
     def sell(self, *,
@@ -218,8 +218,8 @@ class Strategy(metaclass=ABCMeta):
 
         See also `Strategy.buy()`.
         """
-        assert 0 < size < 1 or round(size) == size, \
-            "size must be a positive fraction of equity, or a positive whole number of units"
+        #assert 0 < size < 1 or round(size) == size, \
+        #    "size must be a positive fraction of equity, or a positive whole number of units"
         return self._broker.new_order(-size, limit, stop, sl, tp)
 
     @property
@@ -986,7 +986,8 @@ class Backtest:
                  margin: float = 1.,
                  trade_on_close=False,
                  hedging=False,
-                 exclusive_orders=False
+                 exclusive_orders=False,
+                 multiplier: float = 1.
                  ):
         """
         Initialize a backtest. Requires data and a strategy to test.
@@ -1532,7 +1533,7 @@ class Backtest:
         })
         trades_df['Duration'] = trades_df['ExitTime'] - trades_df['EntryTime']
 
-        pl = trades_df['PnL']
+        pl = trades_df['PnL'] * self.muliplier
         returns = trades_df['ReturnPct']
         durations = trades_df['Duration']
 
